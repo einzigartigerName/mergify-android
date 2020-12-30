@@ -1,0 +1,42 @@
+<resources>
+    <!-- Title -->
+    <string name="app_name">Mergify</string>
+    <string name="title_main">Copy/Merge Playlists</string>
+    <string name="title_tracks">Tracks for new Playlist</string>
+    <string name="title_dialog_add_playlist">Playlist</string>
+    <string name="title_dialog_create_playlist">Playlist Options</string>
+
+    <!-- Storage -->
+    <string name="preferences_name">MergifyCache</string>
+    <string name="storage_token">SpotifyToken</string>
+
+    <!-- Bundle -->
+    <string name="bundle_all_tracks">AllTracks</string>
+    <string name="bundle_spotify_userID">UserID</string>
+
+    <!-- TextEdit Hints -->
+    <string name="hint_add_playlist">Playlist Url</string>
+    <string name="hint_playlist_description">Playlist Description</string>
+    <string name="hint_playlist_name">Playlist Name</string>
+
+    <!-- Text -->
+    <string name="txt_continue">Continue</string>
+    <string name="txt_invalid_playlist_name">Name must not be empty!</string>
+    <string name="txt_invalid_url">Not a valid Playlist URL</string>
+    <string name="txt_login">Login</string>
+
+    <!-- CheckBox Text -->
+    <string name="check_playlist_collaborative">Collaborative Playlist</string>
+    <string name="check_playlist_public">Public Playlist</string>
+
+    <!-- Content Description -->
+    <string name="content_desc_fab_add_playlist">Add a Playlist</string>
+    <string name="content_desc_item_image">Cover</string>
+    <string name="content_desc_item_moveable">Item can be moved in List</string>
+
+    <!-- Misc -->
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="create">Create</string>
+    <string name="add">Add</string>
+</resources>
