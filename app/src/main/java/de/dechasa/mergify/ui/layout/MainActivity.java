@@ -32,6 +32,7 @@ import java.util.stream.Collectors;
 
 import de.dechasa.mergify.R;
 import de.dechasa.mergify.databinding.ActivityMainBinding;
+import de.dechasa.mergify.spotify.MergePattern;
 import de.dechasa.mergify.spotify.PlaylistData;
 import de.dechasa.mergify.spotify.TrackData;
 import de.dechasa.mergify.ui.PlaylistAdapter;
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements AddPlaylistDialog
 
     private String userID;
     private String TOKEN;
+
+    private MergePattern pattern = MergePattern.APPEND;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,7 +158,12 @@ public class MainActivity extends AppCompatActivity implements AddPlaylistDialog
      * Continue to TrackActivity for editing the Tracks
      */
     private void onClickContinue() {
-        ArrayList<TrackData> allData = new ArrayList<>(adapter.getPlaylistTracks());
+        List<List<TrackData>> playlists = adapter.getPlaylistTracks();
+
+        playlists.forEach(l -> l.forEach(t -> System.out.println(t.title)));
+
+
+        ArrayList<TrackData> allData = new ArrayList<>(pattern.merge(playlists));
 
         Intent activity = new Intent(this, TracksActivity.class);
         activity.putParcelableArrayListExtra(getString(R.string.bundle_all_tracks), allData);

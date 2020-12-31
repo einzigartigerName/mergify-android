@@ -15,6 +15,7 @@
         tools:ignore="AllowBackup">
         <activity
             android:name=".ui.layout.LoginActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

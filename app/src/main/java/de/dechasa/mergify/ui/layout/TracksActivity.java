@@ -146,6 +146,12 @@ public class TracksActivity extends AppCompatActivity implements CreatePlaylistD
             public void success(Pager<PlaylistTrack> pager, Response response) {
                 if (tracks.size() > offset + 100) {
                     appendTracks(tracks, playlist, offset + 100);
+                } else {
+                    Toast.makeText(
+                            getBaseContext(),
+                            "Created Playlist",
+                            Toast.LENGTH_LONG
+                    ).show();
                 }
             }
 

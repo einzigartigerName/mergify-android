@@ -24,6 +24,7 @@
     <string name="txt_invalid_playlist_name">Name must not be empty!</string>
     <string name="txt_invalid_url">Not a valid Playlist URL</string>
     <string name="txt_login">Login</string>
+    <string name="txt_login_spotify">Authenticate using Spotify</string>
 
     <!-- CheckBox Text -->
     <string name="check_playlist_collaborative">Collaborative Playlist</string>

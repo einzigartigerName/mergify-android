@@ -24,12 +24,10 @@ public class PlaylistAdapter extends RecyclerView.Adapter<GenericViewHolder>  im
     final Context context;
     final List<PlaylistData> playlists;
 
-
     public PlaylistAdapter(Context context, List<PlaylistData> playlists) {
         this.context = context;
         this.playlists = playlists;
     }
-
 
     @NonNull
     @Override
@@ -76,19 +74,22 @@ public class PlaylistAdapter extends RecyclerView.Adapter<GenericViewHolder>  im
         notifyItemMoved(from, to);
     }
 
+    /**
+     * Add PlaylistData to List
+     * @param playlist Playlist to add
+     */
     public void addPlaylist(PlaylistData playlist) {
         playlists.add(playlist);
         notifyDataSetChanged();
     }
 
-    public List<TrackData> getPlaylistTracks() {
-        List<TrackData> combined = new ArrayList<>();
-        playlists.stream()
+    /**
+     * Return all Tracks outside of Playlist Object
+     * @return all Tracks
+     */
+    public List<List<TrackData>> getPlaylistTracks() {
+        return playlists.stream()
                 .map(playlist -> playlist.tracks)
-                .collect(Collectors.toList())
-                .forEach(combined::addAll);
-
-        return combined;
+                .collect(Collectors.toList());
     }
-
 }
