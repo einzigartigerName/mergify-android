@@ -38,6 +38,7 @@ import de.dechasa.mergify.spotify.TrackData;
 import de.dechasa.mergify.ui.PlaylistAdapter;
 import de.dechasa.mergify.ui.SwipeCallback;
 import de.dechasa.mergify.ui.dialog.AddPlaylistDialog;
+import de.dechasa.mergify.ui.dialog.MergePatternDialog;
 import kaaes.spotify.webapi.android.SpotifyApi;
 import kaaes.spotify.webapi.android.SpotifyCallback;
 import kaaes.spotify.webapi.android.SpotifyError;
@@ -46,12 +47,15 @@ import kaaes.spotify.webapi.android.models.Playlist;
 import kaaes.spotify.webapi.android.models.UserPrivate;
 import retrofit.client.Response;
 
-public class MainActivity extends AppCompatActivity implements AddPlaylistDialog.OnClickListener {
+public class MainActivity extends AppCompatActivity implements
+        AddPlaylistDialog.OnClickListener,
+        MergePatternDialog.OnClickListener {
 
     private static final String TAG = "MainActivity.class";
 
     private PlaylistAdapter adapter;
     private SpotifyService spotify;
+    private Menu menu;
 
     private String userID;
     private String TOKEN;
@@ -84,13 +88,14 @@ public class MainActivity extends AppCompatActivity implements AddPlaylistDialog
         binding.playlistListView.setItemAnimator(new DefaultItemAnimator());
         binding.playlistListView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
-
         ItemTouchHelper swipeListener = new ItemTouchHelper(new SwipeCallback(adapter));
         swipeListener.attachToRecyclerView(binding.playlistListView);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        this.menu = menu;
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main_activity, menu);
         return true;
@@ -98,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements AddPlaylistDialog
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int itemId = item.getItemId();
 
         if (itemId == android.R.id.home) {
@@ -108,13 +112,16 @@ public class MainActivity extends AppCompatActivity implements AddPlaylistDialog
             onClickContinue();
             return true;
 
+        } else if (itemId == R.id.btnMergePatternSelect) {
+            onClickMergeSelect();
+            return true;
         } else {
             return super.onOptionsItemSelected(item);
         }
     }
 
     /**
-     * New Playlist Callback
+     * AddPlaylistDialog Callback
      * @param playlist playlist to Add to List
      */
     @Override
@@ -147,11 +154,32 @@ public class MainActivity extends AppCompatActivity implements AddPlaylistDialog
     }
 
     /**
+     * MergePatternSelect Callback
+     * -> Save selected and update Icon for MenuButton
+     * @param pattern selected Pattern
+     */
+    @Override
+    public void onSave(MergePattern pattern) {
+        if (pattern != null) {
+            this.pattern = pattern;
+            setMergePatternButton();
+        }
+    }
+
+    /**
      * Show Dialog for Adding a new Playlist
      */
     public void onClickAdd(final View view) {
         DialogFragment dialog = new AddPlaylistDialog();
         dialog.show(getSupportFragmentManager(), "AddPlaylistDialog");
+    }
+
+    /**
+     * Show the Merge Select Dialog
+     */
+    private void onClickMergeSelect() {
+        MergePatternDialog dialog = new MergePatternDialog(pattern);
+        dialog.show(getSupportFragmentManager(), "MergePatternDialog");
     }
 
     /**
@@ -170,6 +198,30 @@ public class MainActivity extends AppCompatActivity implements AddPlaylistDialog
         activity.putExtra(getString(R.string.bundle_spotify_userID), userID);
 
         startActivity(activity);
+    }
+
+    /**
+     * Set the Icon for the MenuItem select MergePattern Button
+     * Default: APPEND
+     */
+    private void setMergePatternButton() {
+        int drawableID;
+
+        switch (pattern) {
+            case SHUFFLE:
+                drawableID = R.drawable.ic_shuffle_24;
+                break;
+
+            case ALTERNATE:
+                drawableID = R.drawable.ic_alternate_24;
+                break;
+            default:
+                pattern = MergePattern.APPEND;
+                drawableID = R.drawable.ic_append_24;
+                break;
+        }
+
+        menu.findItem(R.id.btnMergePatternSelect).setIcon(drawableID);
     }
 
     /**

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <TextView
         android:id="@+id/txtLoginText"
         android:layout_width="wrap_content"
@@ -38,6 +39,7 @@
         android:layout_height="48dp"
         android:onClick="onClickLogin"
         android:text="@string/txt_login"
+        android:background="@color/spotify"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

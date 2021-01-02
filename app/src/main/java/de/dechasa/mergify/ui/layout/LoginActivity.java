@@ -2,7 +2,6 @@ package de.dechasa.mergify.ui.layout;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
@@ -13,6 +12,8 @@ import androidx.appcompat.app.AppCompatDelegate;
 import com.spotify.sdk.android.auth.AuthorizationClient;
 import com.spotify.sdk.android.auth.AuthorizationRequest;
 import com.spotify.sdk.android.auth.AuthorizationResponse;
+
+import java.util.Objects;
 
 import de.dechasa.mergify.R;
 import de.dechasa.mergify.databinding.ActivityLoginBinding;
@@ -44,6 +45,8 @@ public class LoginActivity extends AppCompatActivity {
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         TOKEN_KEY = getString(R.string.storage_token);
         storage = getSharedPreferences(getString(R.string.preferences_name), MODE_PRIVATE);

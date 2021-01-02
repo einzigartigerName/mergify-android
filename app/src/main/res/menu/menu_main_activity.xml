@@ -3,7 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/btnMergePatternSelect"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_append_24"
+        android:title="@string/txt_merge_select" />
+
+    <item
         android:id="@+id/btnMainContinue"
-        android:title="@string/txt_continue"
-        app:showAsAction="ifRoom" />
+        android:icon="@drawable/ic_arrow_forward_24"
+        app:showAsAction="ifRoom"
+        android:title="@string/txt_continue" />
 </menu>

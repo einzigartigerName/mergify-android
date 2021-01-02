@@ -20,6 +20,11 @@ public enum MergePattern {
 
             return combined;
         }
+
+        @Override
+        public String toString() {
+            return "Append";
+        }
     },
 
 
@@ -35,6 +40,11 @@ public enum MergePattern {
             Collections.shuffle(output, new Random());
 
             return output;
+        }
+
+        @Override
+        public String toString() {
+            return "Shuffle";
         }
     },
 
@@ -61,6 +71,11 @@ public enum MergePattern {
 
             return output;
         }
+
+        @Override
+        public String toString() {
+            return "Alternate";
+        }
     };
 
     /**
@@ -69,4 +84,13 @@ public enum MergePattern {
      * @return Merged Tracks
      */
     public abstract List<TrackData> merge(List<List<TrackData>> playlists);
+
+    public static MergePattern fromString(String input) {
+        switch (input.toLowerCase()) {
+            case "append": return APPEND;
+            case "shuffle": return SHUFFLE;
+            case "alternate": return ALTERNATE;
+            default: return null;
+        }
+    }
 }
