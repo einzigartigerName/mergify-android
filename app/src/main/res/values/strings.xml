@@ -5,6 +5,7 @@
     <string name="title_tracks">Tracks for new Playlist</string>
     <string name="title_dialog_add_playlist">Playlist</string>
     <string name="title_dialog_create_playlist">Playlist Options</string>
+    <string name="title_dialog_profile">Current User</string>
     <string name="title_dialog_select_merge_pattern">Merge Type to use</string>
 
     <!-- Storage -->
@@ -25,6 +26,7 @@
     <string name="txt_invalid_playlist_name">Name must not be empty!</string>
     <string name="txt_invalid_url">Not a valid Playlist URL</string>
     <string name="txt_login">Login</string>
+    <string name="txt_logout">Logout</string>
     <string name="txt_login_spotify">Authenticate using Spotify</string>
     <string name="txt_merge_select">Select a Merge Pattern</string>
 
@@ -36,6 +38,7 @@
     <string name="content_desc_fab_add_playlist">Add a Playlist</string>
     <string name="content_desc_item_image">Cover</string>
     <string name="content_desc_item_moveable">Item can be moved in List</string>
+    <string name="content_desc_profile_image">Profile picture of the current User</string>
 
     <!-- Misc -->
     <string name="save">Save</string>

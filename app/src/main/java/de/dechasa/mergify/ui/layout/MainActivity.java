@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,6 +25,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.spotify.sdk.android.auth.AuthorizationRequest;
+import com.spotify.sdk.android.auth.app.SpotifyNativeAuthUtil;
+import com.spotify.sdk.android.auth.webview.LoginDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +43,7 @@ import de.dechasa.mergify.ui.PlaylistAdapter;
 import de.dechasa.mergify.ui.SwipeCallback;
 import de.dechasa.mergify.ui.dialog.AddPlaylistDialog;
 import de.dechasa.mergify.ui.dialog.MergePatternDialog;
+import de.dechasa.mergify.ui.dialog.ProfileDialog;
 import kaaes.spotify.webapi.android.SpotifyApi;
 import kaaes.spotify.webapi.android.SpotifyCallback;
 import kaaes.spotify.webapi.android.SpotifyError;
@@ -49,7 +54,8 @@ import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity implements
         AddPlaylistDialog.OnClickListener,
-        MergePatternDialog.OnClickListener {
+        MergePatternDialog.OnClickListener,
+        ProfileDialog.Action {
 
     private static final String TAG = "MainActivity.class";
 
@@ -58,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements
     private Menu menu;
 
     private String userID;
+    private String userName;
+    private String userImg;
     private String TOKEN;
 
     private MergePattern pattern = MergePattern.APPEND;
@@ -106,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements
         int itemId = item.getItemId();
 
         if (itemId == android.R.id.home) {
+            onClickHome();
             return true;
 
         } else if (itemId == R.id.btnMainContinue) {
@@ -167,11 +176,32 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     /**
+     * ProfileDialog Callback
+     * Logout the current user
+     */
+    @Override
+    public void onLogout() {
+        LoginDialog.clearCookies(this);
+
+        Intent login = new Intent(this, LoginActivity.class);
+        login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(login);
+    }
+
+    /**
      * Show Dialog for Adding a new Playlist
      */
     public void onClickAdd(final View view) {
         DialogFragment dialog = new AddPlaylistDialog();
         dialog.show(getSupportFragmentManager(), "AddPlaylistDialog");
+    }
+
+    /**
+     * Show ProfileDialog to logout/see who is currently loged in
+     */
+    private void onClickHome() {
+        ProfileDialog dialog = new ProfileDialog(userName, userImg);
+        dialog.show(getSupportFragmentManager(), "ProfileDialog");
     }
 
     /**
@@ -236,13 +266,13 @@ public class MainActivity extends AppCompatActivity implements
 
         @Override
         public void success(UserPrivate userPrivate, Response response) {
-            String img = (userPrivate.images.isEmpty()) ? "" : userPrivate.images.get(0).url;
-
+            userImg = (userPrivate.images.isEmpty()) ? "" : userPrivate.images.get(0).url;
+            userName = userPrivate.display_name;
             userID = userPrivate.id;
 
             Glide.with(getBaseContext())
                     .asDrawable()
-                    .load(img)
+                    .load(userImg)
                     .placeholder(R.drawable.ic_profile_24)
                     .fitCenter()
                     .circleCrop()
@@ -259,7 +289,6 @@ public class MainActivity extends AppCompatActivity implements
             Bitmap b = ((BitmapDrawable) resource).getBitmap();
             Bitmap bitmapResized = Bitmap.createScaledBitmap(b, 128, 128, false);
             Drawable img = new BitmapDrawable(getResources(), bitmapResized);
-
 
             Objects.requireNonNull(getSupportActionBar()).setHomeAsUpIndicator(img);
         }
