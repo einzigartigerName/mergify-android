@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,9 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.spotify.sdk.android.auth.AuthorizationRequest;
-import com.spotify.sdk.android.auth.app.SpotifyNativeAuthUtil;
-import com.spotify.sdk.android.auth.webview.LoginDialog;
+import com.spotify.sdk.android.auth.AuthorizationClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -181,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements
      */
     @Override
     public void onLogout() {
-        LoginDialog.clearCookies(this);
+        AuthorizationClient.clearCookies(this);
 
         Intent login = new Intent(this, LoginActivity.class);
         login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

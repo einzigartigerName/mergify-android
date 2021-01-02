@@ -25,9 +25,8 @@
     <string name="txt_continue">Continue</string>
     <string name="txt_invalid_playlist_name">Name must not be empty!</string>
     <string name="txt_invalid_url">Not a valid Playlist URL</string>
-    <string name="txt_login">Login</string>
-    <string name="txt_logout">Logout</string>
     <string name="txt_login_spotify">Authenticate using Spotify</string>
+    <string name="txt_logout_info">This will only work, if the Spotify App is not installed.</string>
     <string name="txt_merge_select">Select a Merge Pattern</string>
 
     <!-- CheckBox Text -->
@@ -41,8 +40,10 @@
     <string name="content_desc_profile_image">Profile picture of the current User</string>
 
     <!-- Misc -->
-    <string name="save">Save</string>
+    <string name="add">Add</string>
     <string name="cancel">Cancel</string>
     <string name="create">Create</string>
-    <string name="add">Add</string>
+    <string name="save">Save</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
 </resources>

@@ -18,6 +18,18 @@
         android:layout_below="@id/imgProfilePic"
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtLogoutInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtProfileName"
+        android:layout_centerHorizontal="true"
+        android:text="@string/txt_logout_info"
+        android:textColor="#BFFFFFFF"
+        android:textSize="12sp"
+        android:textStyle="italic" />
 </RelativeLayout>

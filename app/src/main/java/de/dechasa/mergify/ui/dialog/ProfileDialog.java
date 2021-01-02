@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -60,7 +59,7 @@ public class ProfileDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(binding.getRoot())
                 .setTitle(R.string.title_dialog_profile)
-                .setNeutralButton(R.string.txt_logout, (dialog, which) -> delegate.onLogout());
+                .setNeutralButton(R.string.logout, (dialog, which) -> delegate.onLogout());
 
         return builder.create();
     }
