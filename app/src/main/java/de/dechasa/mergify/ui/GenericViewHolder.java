@@ -21,6 +21,9 @@ public class GenericViewHolder extends RecyclerView.ViewHolder {
         cover = view.findViewById(R.id.imgItemCover);
         title = view.findViewById(R.id.txtItemTitle);
         subtitle = view.findViewById(R.id.txtItemSubtitle);
+
+        title.setSelected(true);
+        subtitle.setSelected(true);
     }
 
     public ImageView getCover() {

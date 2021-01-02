@@ -1,6 +1,7 @@
 package de.dechasa.mergify.ui;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,8 +42,10 @@ public class PlaylistAdapter extends RecyclerView.Adapter<GenericViewHolder>  im
     public void onBindViewHolder(@NonNull GenericViewHolder holder, int position) {
         PlaylistData data = playlists.get(position);
 
+        String total = "Total: " + data.total;
+
         holder.title.setText(data.name);
-        holder.subtitle.setText(data.id);
+        holder.subtitle.setText(total);
 
         Glide.with(context)
                 .load(data.image)

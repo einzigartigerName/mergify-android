@@ -1,43 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:paddingHorizontal="5dp">
 
-        <ImageView
-            android:id="@+id/imgItemCover"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_gravity="center"
-            android:paddingHorizontal="5dp"
-            android:paddingVertical="5dp"
-            android:contentDescription="@string/content_desc_item_image" />
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/rlCover"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true">
+
+            <ImageView
+                android:id="@+id/imgItemCover"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:paddingHorizontal="5dp"
+                android:paddingVertical="5dp"
+                android:contentDescription="@string/content_desc_item_image" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingHorizontal="5dp">
+            android:paddingHorizontal="5dp"
+            android:layout_toEndOf="@id/rlCover"
+            android:layout_toStartOf="@id/rlMoveable" >
 
             <TextView
                 android:id="@+id/txtItemTitle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textAlignment="textStart"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit ="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:scrollHorizontally="true"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtItemSubtitle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit ="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:scrollHorizontally="true"
+                android:layout_below="@id/txtItemTitle" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_gravity="end"
-            android:layout_weight="1"
-            android:paddingHorizontal="5dp"
-            android:paddingVertical="5dp"
-            android:contentDescription="@string/content_desc_item_moveable"/>
-    </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/rlMoveable"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_menu_24"
+                android:contentDescription="@string/content_desc_item_moveable"/>
+        </RelativeLayout>
+    </RelativeLayout>

@@ -20,7 +20,12 @@ public class TrackData implements Parcelable {
                 .map(a -> a.name)
                 .collect(Collectors.toList());
 
-        String img = track.album.images.get(0).url;
+        String img = "";
+
+        if (! track.album.images.isEmpty()) {
+            img = track.album.images.get(0).url;
+        }
+
 
         return new TrackData(track.id, track.name, artists, img);
     }

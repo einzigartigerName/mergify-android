@@ -1,6 +1,7 @@
 package de.dechasa.mergify.ui;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,7 @@ public class TrackAdapter extends RecyclerView.Adapter<GenericViewHolder> implem
 
         holder.title.setText(data.title);
         holder.subtitle.setText(data.toStringArtists());
+        holder.subtitle.setTypeface(holder.subtitle.getTypeface(), Typeface.ITALIC);
 
         Glide.with(context)
                 .load(data.image)
